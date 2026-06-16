@@ -9,6 +9,9 @@ import ContactListPage from './pages/Contacts/ContactListPage';
 import AccountListPage from './pages/Accounts/AccountListPage';
 import OpportunityListPage from './pages/Opportunities/OpportunityListPage';
 import ActivityListPage from './pages/activities/ActivityListPage';
+import TicketListPage from './pages/Tickets/TicketListPage';
+import TicketFormPage from './pages/Tickets/TicketFormPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 
 const queryClient = new QueryClient();
 
@@ -27,8 +30,12 @@ export default function App() {
               <Route path="/accounts" element={<AccountListPage />} />
               <Route path="/opportunities" element={<OpportunityListPage />} />
               <Route path="/activities" element={<ActivityListPage />} />
+              <Route path="/tickets" element={<TicketListPage />} />
+              <Route path="/tickets/new" element={<TicketFormPage />} />
+              <Route path="/tickets/:id/edit" element={<TicketFormPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
             </Route>
-            <Route path="/" element={<Navigate to="/customers" replace />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

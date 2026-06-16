@@ -1,5 +1,6 @@
 using CRM.Application.Exceptions;
 using CRM.Application.Interfaces;
+using CRM.Domain.Enums;
 using MediatR;
 
 namespace CRM.Application.Features.Leads.Update;
@@ -24,6 +25,9 @@ public class UpdateLeadHandler(ILeadRepository repo) : IRequestHandler<UpdateLea
         lead.Source = request.Source;
         lead.Notes = request.Notes;
         lead.UpdatedAt = DateTime.UtcNow;
+
+        if (request.Status == LeadStatus.Converted && lead.ConvertedAt == null)
+            lead.ConvertedAt = DateTime.UtcNow;
 
         await repo.UpdateAsync(lead, cancellationToken);
     }

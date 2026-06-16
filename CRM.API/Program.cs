@@ -30,6 +30,8 @@ builder.Services.AddScoped<IOpportunityRepository, OpportunityRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<ILeadRepository, LeadRepository>();
 builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 
 // JWT authentication — key MUST come from JWT__KEY env var, never from appsettings.json
@@ -68,6 +70,11 @@ builder.Services.AddAuthorization(opts =>
     opts.AddPolicy("customers.view",   p => p.AddRequirements(new PermissionRequirement("customers.view")));
     opts.AddPolicy("customers.edit",   p => p.AddRequirements(new PermissionRequirement("customers.edit")));
     opts.AddPolicy("customers.delete", p => p.AddRequirements(new PermissionRequirement("customers.delete")));
+    opts.AddPolicy("tickets.view",   p => p.AddRequirements(new PermissionRequirement("tickets.view")));
+    opts.AddPolicy("tickets.create", p => p.AddRequirements(new PermissionRequirement("tickets.create")));
+    opts.AddPolicy("tickets.edit",   p => p.AddRequirements(new PermissionRequirement("tickets.edit")));
+    opts.AddPolicy("tickets.delete", p => p.AddRequirements(new PermissionRequirement("tickets.delete")));
+    opts.AddPolicy("dashboard.view", p => p.AddRequirements(new PermissionRequirement("dashboard.view")));
 });
 
 // Rate limiting on auth endpoint — 5 attempts per minute per IP (Security S2)

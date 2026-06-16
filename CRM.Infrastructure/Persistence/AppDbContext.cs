@@ -1,4 +1,5 @@
 using CRM.Domain.Entities;
+using CRM.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Infrastructure.Persistence;
@@ -11,6 +12,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Lead> Leads => Set<Lead>();
     public DbSet<Activity> Activities => Set<Activity>();
+    public DbSet<Ticket> Tickets => Set<Ticket>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<Permission> Permissions => Set<Permission>();
@@ -48,6 +50,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         modelBuilder.Entity<Activity>()
             .HasQueryFilter(a => !a.IsDeleted);
+
+        modelBuilder.ApplyConfiguration(new TicketConfiguration());
 
         modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
         modelBuilder.Entity<RolePermission>().HasKey(rp => new { rp.RoleId, rp.PermissionId });

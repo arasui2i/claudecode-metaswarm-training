@@ -15,6 +15,7 @@ public class Lead
     public LeadSource Source { get; set; } = LeadSource.Other;
     public string Notes { get; set; } = string.Empty;
     public Guid? ConvertedCustomerId { get; set; }
+    public DateTime? ConvertedAt { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public bool IsDeleted { get; set; }
