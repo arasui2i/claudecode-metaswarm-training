@@ -7,6 +7,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 {
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<Account> Accounts => Set<Account>();
+    public DbSet<Opportunity> Opportunities => Set<Opportunity>();
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Lead> Leads => Set<Lead>();
     public DbSet<User> Users => Set<User>();
@@ -21,6 +22,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasQueryFilter(c => !c.IsDeleted);
         modelBuilder.Entity<Account>()
             .HasQueryFilter(a => !a.IsDeleted);
+        modelBuilder.Entity<Opportunity>()
+            .HasQueryFilter(o => !o.IsDeleted);
+        modelBuilder.Entity<Opportunity>()
+            .HasIndex(o => o.Name).IsUnique();
+        modelBuilder.Entity<Opportunity>()
+            .Property(o => o.Amount).HasColumnType("decimal(18,2)");
         modelBuilder.Entity<Account>()
             .HasIndex(a => a.Name).IsUnique();
         modelBuilder.Entity<Account>()
