@@ -24,6 +24,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(LoginCommandValidator).Assembl
 
 // Infrastructure services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 
 // JWT authentication — key MUST come from JWT__KEY env var, never from appsettings.json

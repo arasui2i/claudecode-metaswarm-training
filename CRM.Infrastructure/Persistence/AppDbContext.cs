@@ -5,6 +5,7 @@ namespace CRM.Infrastructure.Persistence;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
+    public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<Permission> Permissions => Set<Permission>();
@@ -13,6 +14,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Customer>()
+            .HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<Customer>()
+            .HasIndex(c => c.Email).IsUnique();
+        modelBuilder.Entity<Customer>()
+            .Property(c => c.AnnualIncome).HasColumnType("decimal(18,2)");
+
         modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
         modelBuilder.Entity<RolePermission>().HasKey(rp => new { rp.RoleId, rp.PermissionId });
 
