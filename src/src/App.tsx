@@ -6,6 +6,7 @@ import LoginPage from './pages/Login/LoginPage';
 import CustomerListPage from './pages/Customers/CustomerListPage';
 import LeadListPage from './pages/Leads/LeadListPage';
 import ContactListPage from './pages/Contacts/ContactListPage';
+import AccountListPage from './pages/Accounts/AccountListPage';
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ export default function App() {
               <Route path="/customers" element={<CustomerListPage />} />
               <Route path="/leads" element={<LeadListPage />} />
               <Route path="/contacts" element={<ContactListPage />} />
+              <Route path="/accounts" element={<AccountListPage />} />
             </Route>
             <Route path="/" element={<Navigate to="/customers" replace />} />
           </Routes>

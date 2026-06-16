@@ -25,6 +25,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(LoginCommandValidator).Assembl
 // Infrastructure services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<ILeadRepository, LeadRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();

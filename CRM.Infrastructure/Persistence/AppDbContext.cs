@@ -6,6 +6,7 @@ namespace CRM.Infrastructure.Persistence;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<Account> Accounts => Set<Account>();
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Lead> Leads => Set<Lead>();
     public DbSet<User> Users => Set<User>();
@@ -18,6 +19,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         modelBuilder.Entity<Customer>()
             .HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<Account>()
+            .HasQueryFilter(a => !a.IsDeleted);
+        modelBuilder.Entity<Account>()
+            .HasIndex(a => a.Name).IsUnique();
+        modelBuilder.Entity<Account>()
+            .Property(a => a.AnnualRevenue).HasColumnType("decimal(18,2)");
         modelBuilder.Entity<Contact>()
             .HasQueryFilter(c => !c.IsDeleted);
         modelBuilder.Entity<Contact>()
