@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/Login/LoginPage';
 import CustomerListPage from './pages/Customers/CustomerListPage';
 import LeadListPage from './pages/Leads/LeadListPage';
+import ContactListPage from './pages/Contacts/ContactListPage';
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ export default function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/customers" element={<CustomerListPage />} />
               <Route path="/leads" element={<LeadListPage />} />
+              <Route path="/contacts" element={<ContactListPage />} />
             </Route>
             <Route path="/" element={<Navigate to="/customers" replace />} />
           </Routes>
