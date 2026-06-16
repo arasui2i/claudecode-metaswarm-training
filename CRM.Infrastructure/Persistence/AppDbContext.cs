@@ -6,6 +6,7 @@ namespace CRM.Infrastructure.Persistence;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<Lead> Leads => Set<Lead>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<Permission> Permissions => Set<Permission>();
@@ -16,6 +17,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         modelBuilder.Entity<Customer>()
             .HasQueryFilter(c => !c.IsDeleted);
+        modelBuilder.Entity<Lead>()
+            .HasQueryFilter(l => !l.IsDeleted);
+        modelBuilder.Entity<Lead>()
+            .HasIndex(l => l.Email).IsUnique();
         modelBuilder.Entity<Customer>()
             .HasIndex(c => c.Email).IsUnique();
         modelBuilder.Entity<Customer>()

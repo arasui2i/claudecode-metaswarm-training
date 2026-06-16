@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/Login/LoginPage';
 import CustomerListPage from './pages/Customers/CustomerListPage';
+import LeadListPage from './pages/Leads/LeadListPage';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/forgot-password" element={<p>Forgot password — coming soon</p>} />
             <Route element={<ProtectedRoute />}>
               <Route path="/customers" element={<CustomerListPage />} />
+              <Route path="/leads" element={<LeadListPage />} />
             </Route>
             <Route path="/" element={<Navigate to="/customers" replace />} />
           </Routes>
