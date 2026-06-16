@@ -8,6 +8,7 @@ import LeadListPage from './pages/Leads/LeadListPage';
 import ContactListPage from './pages/Contacts/ContactListPage';
 import AccountListPage from './pages/Accounts/AccountListPage';
 import OpportunityListPage from './pages/Opportunities/OpportunityListPage';
+import ActivityListPage from './pages/activities/ActivityListPage';
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="/contacts" element={<ContactListPage />} />
               <Route path="/accounts" element={<AccountListPage />} />
               <Route path="/opportunities" element={<OpportunityListPage />} />
+              <Route path="/activities" element={<ActivityListPage />} />
             </Route>
             <Route path="/" element={<Navigate to="/customers" replace />} />
           </Routes>

@@ -10,6 +10,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Opportunity> Opportunities => Set<Opportunity>();
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Lead> Leads => Set<Lead>();
+    public DbSet<Activity> Activities => Set<Activity>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<Permission> Permissions => Set<Permission>();
@@ -44,6 +45,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasIndex(c => c.Email).IsUnique();
         modelBuilder.Entity<Customer>()
             .Property(c => c.AnnualIncome).HasColumnType("decimal(18,2)");
+
+        modelBuilder.Entity<Activity>()
+            .HasQueryFilter(a => !a.IsDeleted);
 
         modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
         modelBuilder.Entity<RolePermission>().HasKey(rp => new { rp.RoleId, rp.PermissionId });
