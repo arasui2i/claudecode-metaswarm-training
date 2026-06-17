@@ -1,0 +1,48 @@
+{
+  "version": "1.0",
+  "project": {
+    "name": "Anticlock CRM",
+    "type": "fullstack",
+    "description": "CRM application — training repo for Claude Code multi-agent (metaswarm) workflows"
+  },
+  "stack": {
+    "backend": {
+      "language": "csharp",
+      "framework": "aspnetcore9",
+      "orm": "efcore",
+      "database": "sqlserver",
+      "architecture": "clean-architecture",
+      "patterns": ["cqrs", "mediatr", "fluentvalidation", "jwt"],
+      "testRunner": "nunit",
+      "testProject": "CRM.Tests"
+    },
+    "frontend": {
+      "language": "typescript",
+      "framework": "react",
+      "uiLibrary": "material-ui",
+      "formLibrary": "react-hook-form",
+      "dataFetching": "react-query",
+      "testRunner": "vitest",
+      "testUtils": "testing-library"
+    }
+  },
+  "quality": {
+    "coverageThreshold": 80,
+    "enforceTests": true,
+    "tddRequired": true
+  },
+  "externalTools": {
+    "gemini": false,
+    "codex": false
+  },
+  "ci": {
+    "system": "github-actions",
+    "workflowDir": ".github/workflows"
+  },
+  "agents": {
+    "swarm": true,
+    "planReviewGate": true,
+    "designReviewGate": true,
+    "adversarialReview": true
+  }
+}
